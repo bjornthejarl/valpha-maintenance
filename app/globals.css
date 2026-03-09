@@ -28,15 +28,18 @@ body {
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
   color: var(--text);
   font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
-  overflow: hidden;
+  min-width: 320px;
+  overflow-x: clip;
+  overflow-y: auto;
 }
 
 .page-shell {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: 32px;
+  padding: clamp(16px, 4vw, 40px);
   isolation: isolate;
 }
 
@@ -82,14 +85,15 @@ body {
 
 .maintenance-card {
   position: relative;
-  width: min(100%, 880px);
-  padding: 40px;
+  width: min(100%, 1040px);
+  padding: clamp(24px, 4vw, 40px);
   border: 1px solid var(--card-border);
   border-radius: 32px;
   background:
     linear-gradient(180deg, rgba(16, 39, 47, 0.84) 0%, rgba(8, 22, 29, 0.78) 100%);
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
 
 .maintenance-card::before {
@@ -106,6 +110,7 @@ body {
 .status-pill {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 10px 14px;
   border: 1px solid rgba(133, 245, 210, 0.2);
@@ -115,6 +120,14 @@ body {
   letter-spacing: 0.08em;
   font-size: 0.75rem;
   text-transform: uppercase;
+}
+
+.content-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.85fr);
+  gap: clamp(24px, 4vw, 40px);
+  align-items: end;
 }
 
 .status-dot {
@@ -127,8 +140,8 @@ body {
 }
 
 .hero-copy {
-  margin-top: 28px;
-  max-width: 38rem;
+  min-width: 0;
+  max-width: 40rem;
 }
 
 .eyebrow {
@@ -150,19 +163,20 @@ h1 {
 
 .description {
   margin: 20px 0 0;
-  max-width: 36rem;
+  max-width: 34rem;
   color: var(--muted);
   font-size: clamp(1rem, 2.2vw, 1.15rem);
   line-height: 1.7;
 }
 
 .signal-panel {
-  margin-top: 34px;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 24px;
   align-items: center;
   padding: 22px;
+  width: min(100%, 360px);
+  justify-self: end;
   border-radius: 24px;
   background: rgba(4, 14, 19, 0.44);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -206,6 +220,7 @@ h1 {
 
 .signal-copy {
   min-width: 0;
+  width: 100%;
 }
 
 .signal-label {
@@ -236,9 +251,10 @@ h1 {
 }
 
 .footer-note {
-  margin-top: 28px;
+  margin-top: clamp(28px, 5vw, 52px);
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 14px;
   color: rgba(244, 247, 242, 0.66);
   font-size: 0.94rem;
@@ -298,13 +314,31 @@ h1 {
   }
 }
 
-@media (max-width: 720px) {
-  body {
-    overflow-y: auto;
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 
+  .hero-copy,
+  .description {
+    max-width: none;
+  }
+
+  .signal-panel {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 720px) {
   .page-shell {
-    padding: 20px;
+    place-items: start center;
+  }
+
+  h1 {
+    max-width: 10ch;
+    line-height: 1;
   }
 
   .maintenance-card {
@@ -319,6 +353,7 @@ h1 {
   .signal-panel {
     grid-template-columns: 1fr;
     justify-items: start;
+    gap: 18px;
   }
 
   .signal-core {
@@ -328,5 +363,84 @@ h1 {
 
   .signal-center {
     inset: 28px;
+  }
+}
+
+@media (max-width: 540px) {
+  .status-pill {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin-bottom: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .description {
+    margin-top: 18px;
+    line-height: 1.6;
+  }
+
+  .signal-panel {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .signal-label {
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+  }
+
+  .footer-note {
+    gap: 10px;
+    font-size: 0.88rem;
+  }
+
+  .footer-line {
+    width: 42px;
+  }
+}
+
+@media (max-width: 380px) {
+  .maintenance-card {
+    padding-inline: 18px;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 13vw, 3.2rem);
+  }
+
+  .status-pill {
+    padding-inline: 12px;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+
+  .signal-core {
+    width: 72px;
+    height: 72px;
+  }
+
+  .signal-center {
+    inset: 24px;
+  }
+}
+
+@media (max-height: 720px) {
+  .page-shell {
+    place-items: start center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .status-dot,
+  .ring-one,
+  .ring-two,
+  .ring-three,
+  .progress-fill {
+    animation: none;
   }
 }
