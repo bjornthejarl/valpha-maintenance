@@ -1,47 +1,40 @@
 export default function HomePage() {
   return (
     <main className="page-shell">
-      <div className="background-grid" aria-hidden="true" />
-      <div className="aurora aurora-left" aria-hidden="true" />
-      <div className="aurora aurora-right" aria-hidden="true" />
+      <div className="ambient ambient-top" aria-hidden="true" />
+      <div className="ambient ambient-bottom" aria-hidden="true" />
 
       <section className="maintenance-card">
-        <div className="status-pill">
-          <span className="status-dot" />
-          Scheduled refresh
-        </div>
-
-        <div className="content-grid">
-          <div className="hero-copy">
-            <p className="eyebrow">vAlpha</p>
-            <h1>Site under maintenance.</h1>
-            <p className="description">
-              We&apos;re rebuilding the experience with a cleaner structure and a
-              sharper launch. Thank you for your patience while we tune
-              everything behind the scenes.
-            </p>
-
-            <div className="footer-note">
-              <span className="footer-line" />
-              <p>Please check back soon.</p>
+        <div className="card-frame">
+          <div className="brand-row">
+            <p className="brand-mark">vAlpha</p>
+            <div className="status-pill">
+              <span className="status-dot" />
+              Planned maintenance
             </div>
           </div>
 
-          <aside className="signal-panel" aria-hidden="true">
-            <div className="signal-core">
-              <span className="signal-ring ring-one" />
-              <span className="signal-ring ring-two" />
-              <span className="signal-ring ring-three" />
-              <span className="signal-center" />
+          <div className="content-block">
+            <p className="eyebrow">Temporary pause</p>
+            <h1>We&apos;re preparing a more refined vAlpha experience.</h1>
+            <p className="description">
+              The site is temporarily offline while we complete a focused
+              refresh. We&apos;ll be back shortly with a cleaner, more polished
+              release.
+            </p>
+          </div>
+
+          <div className="info-row">
+            <div className="info-block">
+              <p className="info-label">Status</p>
+              <p className="info-value">Upgrade in progress</p>
             </div>
 
-            <div className="signal-copy">
-              <p className="signal-label">Maintenance in progress</p>
-              <div className="progress-track">
-                <span className="progress-fill" />
-              </div>
+            <div className="info-block">
+              <p className="info-label">Availability</p>
+              <p className="info-value">Please check back soon</p>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
     </main>
